@@ -43,6 +43,7 @@ function Header() {
             </Nav.Link>
 
             <NavDropdown
+              className="ms-2"
               title={<img src={avatar} alt="avatar profilo" height="35" />}
               id="navbarScrollingDropdown"
             >
