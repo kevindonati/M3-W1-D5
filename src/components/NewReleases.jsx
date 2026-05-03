@@ -1,9 +1,11 @@
 import { Component } from "react"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Spinner, Alert } from "react-bootstrap"
 
 class NewReleases extends Component {
   state = {
     movies: [],
+    caricamento: true,
+    errore: false,
   }
   componentDidMount() {
     fetch("https://www.omdbapi.com/?apikey=ed04f11a&s=pokemon ")
@@ -18,10 +20,15 @@ class NewReleases extends Component {
         console.log(data)
         this.setState({
           movies: data.Search,
+          caricamento: false,
         })
       })
       .catch((err) => {
         console.log("Errore nella fetch", err)
+        this.setState({
+          caricamento: false,
+          errore: true,
+        })
       })
   }
   render() {
@@ -33,6 +40,14 @@ class NewReleases extends Component {
           </Col>
         </Row>
         <Row className="justify-content-center g-3">
+          {this.state.caricamento && (
+            <div className="d-flex justify-content-center my-5">
+              <Spinner animation="border" variant="danger" />
+            </div>
+          )}
+          {this.state.errore && (
+            <Alert variant="danger">Impossibile caricare i film.</Alert>
+          )}
           {this.state.movies.slice(0, 6).map((film) => {
             return (
               <Col

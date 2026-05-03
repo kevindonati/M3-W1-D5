@@ -1,9 +1,11 @@
 import { Component } from "react"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Spinner, Alert } from "react-bootstrap"
 
 class TrendingNow extends Component {
   state = {
     movies: [],
+    caricamento: true,
+    errore: false,
   }
   componentDidMount() {
     fetch("https://www.omdbapi.com/?apikey=ed04f11a&s=Mission:%20Impossible ")
@@ -15,13 +17,17 @@ class TrendingNow extends Component {
         }
       })
       .then((data) => {
-        console.log(data)
         this.setState({
           movies: data.Search,
+          caricamento: false,
         })
       })
       .catch((err) => {
         console.log("Errore nella fetch", err)
+        this.setState({
+          caricamento: false,
+          errore: true,
+        })
       })
   }
   render() {
@@ -33,6 +39,14 @@ class TrendingNow extends Component {
           </Col>
         </Row>
         <Row className="justify-content-center g-3">
+          {this.state.caricamento && (
+            <div className="d-flex justify-content-center my-5">
+              <Spinner animation="border" variant="danger" />
+            </div>
+          )}
+          {this.state.errore && (
+            <Alert variant="danger">Impossibile caricare i film.</Alert>
+          )}
           {this.state.movies.slice(0, 6).map((film) => {
             return (
               <Col

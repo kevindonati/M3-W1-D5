@@ -1,12 +1,4 @@
-import {
-  Container,
-  Row,
-  Col,
-  Image,
-  Dropdown,
-  Button,
-  FormCheck,
-} from "react-bootstrap"
+import { Container, Row, Col, Image, Dropdown, Button } from "react-bootstrap"
 import avatar from "../assets/avatar.png"
 
 const Profile = () => {
@@ -23,11 +15,21 @@ const Profile = () => {
           </Col>
           <Col xs={9} className="p-">
             <p className="bg-secondary fs-5 p-1 w-75">Strive Student</p>
-            <p className="text-secondary fs-4">Language:</p>
-            <Dropdown id="dropdown">
-              <Dropdown.Item href="#">Italiano</Dropdown.Item>
-              <Dropdown.Item href="#">Espanol</Dropdown.Item>
-              <Dropdown.Item href="#">German</Dropdown.Item>
+
+            <Dropdown className="d-inline-block">
+              <Dropdown.Toggle
+                variant="transparent"
+                id="dropdown-basic"
+                className="border-1 border-secondary"
+              >
+                Language:
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href="#">Italian</Dropdown.Item>
+                <Dropdown.Item href="#">Spanish</Dropdown.Item>
+                <Dropdown.Item href="#">Deutch</Dropdown.Item>
+              </Dropdown.Menu>
             </Dropdown>
 
             <hr className="w-75 my-4" />
@@ -48,19 +50,43 @@ const Profile = () => {
 
             <hr className="w-75 my-4" />
 
-            <p className="text-secondary fs-4">Autoplay controls</p>
-            <FormCheck>
-              Autoplay next episode in a series on all devices.
-            </FormCheck>
-            <FormCheck>
-              Autoplay previews while browsing on all devices.
-            </FormCheck>
+            <p className="text-secondary fs-4 m-0">Autoplay controls</p>
+            <div className="form-check text-light d-flex">
+              <input
+                className="form-check-input bg-black border-secondary"
+                type="checkbox"
+                value=""
+                id="checkDefault"
+                style={{ height: "35px", width: "35px" }}
+              />
+              <label
+                className="form-check-label ms-2 d-flex flex-wrap align-content-center"
+                forhtml="checkDefault"
+              >
+                Autoplay next episode in a series on all devices.
+              </label>
+            </div>
+            <div className="form-check text-light d-flex">
+              <input
+                className="form-check-input bg-black border-secondary"
+                type="checkbox"
+                value=""
+                id="checkChecked"
+                style={{ height: "35px", width: "35px" }}
+              />
+              <label
+                className="form-check-label ms-2 d-flex flex-wrap align-content-center"
+                forhtml="checkChecked"
+              >
+                Autoplay previews while browsing on all devices.
+              </label>
+            </div>
           </Col>
 
           <hr className="my-4" />
         </Row>
         <Row>
-          <Col xs={3}>
+          <Col xs={6} lg={3}>
             <Button
               variant="transparent"
               className="w-100 border border-1 border-secondary text-secondary rounded-0"
@@ -68,7 +94,7 @@ const Profile = () => {
               Save
             </Button>
           </Col>
-          <Col xs={3}>
+          <Col xs={6} lg={3}>
             <Button
               variant="transparent"
               className="w-100 border border-1 border-secondary text-secondary rounded-0"
@@ -76,7 +102,7 @@ const Profile = () => {
               Cancel
             </Button>
           </Col>
-          <Col xs={6}>
+          <Col xs={12} lg={6}>
             <Button
               variant="transparent"
               className="w-100 border border-1 border-secondary text-secondary rounded-0"
